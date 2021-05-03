@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<h1>Hello World</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="name :"/>
+			<h:inputText id="name" value="#{userBean.name}"/>
+			<h:outputLabel value="position :"/>
+			<h:inputText id="position" value="#{userBean.position}"/>
+			<h:outputLabel value="department :"/>
+			<h:inputText id="department" value="#{userBean.department}"/>
+			<h:commandButton value="submit">
+				<f:ajax event="click" execute="name position department" listener="#{userBean.action()}" render="name_o position_o department_o"/>
+			</h:commandButton>
+		</h:panelGrid>
+		<br/>
+		
+		
+		<h:panelGrid columns="2">
+			<h:outputLabel value="name :"/>
+			<h:inputText id="name_o" value="#{userBean.name}"/>
+			<h:outputLabel value="position :"/>
+			<h:inputText id="position_o" value="#{userBean.position}"/>
+			<h:outputLabel value="department :"/>
+			<h:inputText id="department_o" value="#{userBean.department}"/>
+			
+		</h:panelGrid>
+		
+		<rich:panel header="test">
+			
+		<h:panelGrid columns="2">
+			<h:outputLabel value="name :"/>
+			<h:inputText id="name" value="#{userBean.name}"/>
+			<h:outputLabel value="position :"/>
+			<h:inputText id="position" value="#{userBean.position}"/>
+			<h:outputLabel value="department :"/>
+			<h:inputText id="department" value="#{userBean.department}"/>
+			<a4j:commandButton execute="name position department" action="#{userBean.action()}" render="out"/>
+			<!-- <h:commandButton value="submit">
+				<f:ajax event="click" execute="name position department" listener="#{userBean.action()}" render="name_o position_o department_o"/>
+			</h:commandButton> -->
+		</h:panelGrid>
+		<br/>
+		
+		<a4j:outputPanel id="out" ajaxRendered="false">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="name :"/>
+				<h:inputText id="name_o" value="#{userBean.name}"/>
+				<h:outputLabel value="position :"/>
+				<h:inputText id="position_o" value="#{userBean.position}"/>
+				<h:outputLabel value="department :"/>
+				<h:inputText id="department_o" value="#{userBean.department}"/>
+			</h:panelGrid>
+		</a4j:outputPanel>
+		
+		</rich:panel>
+		
+		
+	</h:form>
+</body> 
+</html>

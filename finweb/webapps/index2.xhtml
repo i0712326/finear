@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<h:outputScript library="js" name="custom-script.js"/>
+    <h:outputScript library="javax.faces" name="jsf.js"/>
+    <script type="text/javascript">
+        jsf.ajax.addOnError(displayErrorMessage);
+    </script>
+</h:head> 
+<body>
+    <rich:panel>
+        <f:facet name="header">
+        Write your own custom rich components with built-in AJAX support
+        </f:facet>
+		<h:outputText value="Panel Body" /> 
+		
+		<h:form>
+		
+		<h:panelGrid columns="2">
+			<h:outputLabel value="name :"/>
+			<h:inputText id="name" value="#{userBean.name}"/>
+			<h:outputLabel value="position :"/>
+			<h:inputText id="position" value="#{userBean.position}"/>
+			<h:outputLabel value="department :"/>
+			<h:inputText id="department" value="#{userBean.department}"/>
+			<a4j:commandButton value="button1" execute="name" action="#{userBean.action()}" render="out"/>
+			<a4j:commandButton value="button2" execute="name position" action="#{userBean.action()}" render="out"/>
+			<a4j:commandButton value="button3" execute="name position department" action="#{userBean.action()}" render="out"/>
+			<!-- <h:commandButton value="submit">
+				<f:ajax event="click" execute="name position department" listener="#{userBean.action()}" render="name_o position_o department_o"/>
+			</h:commandButton> -->
+			<a4j:commandButton id="err" value="error" action="#{userBean.errorAction()}" onerror="displayErrorMessage"/>
+		</h:panelGrid>
+		<br/>
+		
+		<a4j:outputPanel id="out" ajaxRendered="true">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="name :"/>
+				<h:inputText id="name_o" value="#{userBean.name}"/>
+				<h:outputLabel value="position :"/>
+				<h:inputText id="position_o" value="#{userBean.position}"/>
+				<h:outputLabel value="department :"/>
+				<h:inputText id="department_o" value="#{userBean.department}"/>
+			</h:panelGrid>
+			<br/>
+			 <pre id="error-messages"></pre>
+		</a4j:outputPanel>
+		
+		</h:form>
+		
+	</rich:panel>
+</body> 
+</html>
